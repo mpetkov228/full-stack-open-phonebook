@@ -2,20 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const mongoose = require('mongoose');
 
-const url = process.env.MONGODB_URI;
-
-mongoose.set('strictQuery', false);
-
-mongoose.connect(url);
-
-const personSchema = mongoose.Schema({
-    name: String,
-    number: String
-});
-
-const Person = mongoose.model('Person', personSchema);
+const Person = require('./models/person');
 
 morgan.token('body', request => {
     return JSON.stringify(request.body);
