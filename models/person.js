@@ -20,7 +20,14 @@ const personSchema = mongoose.Schema({
     },
     number: {
         type: String,
-        required: true
+        minLength: 8,
+        required: true,
+        validate: {
+            validator: val => {
+                return /^[0-9]{2,3}-[0-9]*$/.test(val) 
+            },
+            message: props => `Invalid number format`
+        }
     }
 });
 
