@@ -9,7 +9,6 @@ morgan.token('body', request => {
     return JSON.stringify(request.body);
 });
 
-
 const app = express();
 
 app.use(express.json());
@@ -18,11 +17,6 @@ app.use(cors());
 app.use(
     morgan(':method :url :status :res[content-length] - :response-time ms :body')
 );
-
-
-const generateId = () => {
-    return String(Math.floor(Math.random() * 10000));
-};
 
 app.get('/info', (request, response) => {
     response.send(
@@ -72,10 +66,10 @@ app.post('/api/persons', (request, response) => {
 });
 
 app.delete('/api/persons/:id', (request, response) => {
-    const id = request.params.id;
-    persons = persons.filter(p => p.id !== id);
-
-    response.status(204).end();
+    Person.findByIdAndDelete(request.params.id)
+        .then(result => {
+            response.status(204).end();
+        });
 });
 
 const PORT = process.env.PORT;
