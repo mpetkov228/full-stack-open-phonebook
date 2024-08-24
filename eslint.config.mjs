@@ -33,6 +33,10 @@ export default [
         'error',
         'single'
       ],
+      '@stylistic/js/semi': [
+        'error',
+        'always'
+      ],
       'eqeqeq': 'error',
       'no-trailing-spaces': 'error',
       'object-curly-spacing': [
